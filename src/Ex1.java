@@ -11,6 +11,47 @@
  * You should implement the following static functions:
  */
 public class Ex1 {
+
+
+        private static int getNumberChar(char hexNumber){
+            if(hexNumber >= '0' && hexNumber <= '9' ){
+                return hexNumber -'0';
+            }
+            else if(hexNumber >= 'A' && hexNumber <= 'F' ){
+                return hexNumber - 'A' + 10;
+            }
+            else if(hexNumber >= 'a' && hexNumber <= 'f' ){
+                return hexNumber - 'a' + 10;
+            }
+            return -1;
+        }
+
+        private static char getHexChar(int number){
+            if(number >= 0 && number <= 9 ){
+                return (char)(number + '0');
+            }
+            else if(number >= 10 && number <= 15 ){
+                return (char)(number - 10 + 'A');
+            }
+            return '\0';
+        }
+
+        private static int getBase(String number){
+            return Ex1.getNumberChar(number.charAt(number.length()-1));
+        }
+
+        private static String reversString(String string){
+            String reversed = "";
+            for(int i = string.length()-1; i >= 0; i--){
+                reversed += string.charAt(i);
+            }
+            return reversed;
+        }
+
+        private static String getBase(int base){
+            return "b"+Ex1.getHexChar(base);
+        }
+
         /**
          * Convert the given number (num) to a decimal representation (as int).
          * It the given number is not in a valid format returns -1.
@@ -19,9 +60,18 @@ public class Ex1 {
          */
         public static int number2Int(String num) {
             int ans = -1;
-            // add your code here
+            int sum = 0;
+            int power = 0;
+            int base = Ex1.getBase(num);
+            for(int i = num.length()-3; i >= 0; i--){
+//                System.out.print(num.charAt(i)+" ");
+                sum += getNumberChar(num.charAt(i))*Math.pow(base, power);
+                power++;
 
-            ////////////////////
+            }
+//            System.out.println(sum);
+            ans=sum;
+
             return ans;
         }
         /**
@@ -47,9 +97,15 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-            // add your code here
+                while (num > 0) {
+                    ans += getHexChar(num % base);
+                    num /= base;
+                }
+//                System.out.println(Ex1.reversString(ans));
+                ans = Ex1.reversString(ans);
+                ans = ans + Ex1.getBase(base);
+                System.out.println(ans);
 
-            ////////////////////
             return ans;
         }
 
@@ -61,9 +117,7 @@ public class Ex1 {
          */
         public static boolean equals(String n1, String n2) {
             boolean ans = true;
-            // add your code here
 
-            ////////////////////
             return ans;
         }
 
