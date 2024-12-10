@@ -36,8 +36,15 @@ public class Ex1 {
             return '\0';
         }
 
-        private static int getBase(String number){
-            return Ex1.getNumberChar(number.charAt(number.length()-1));
+        private static int getBase(String number) {
+            if (number == null || number.length() < 2 || number.charAt(number.length() - 2) != 'b') {
+                return -1;
+            }
+            int base = Ex1.getNumberChar(number.charAt(number.length() - 1));
+            if (base <= 1){
+                return -1;
+            }
+            return base;
         }
 
         private static String reversString(String string){
@@ -48,8 +55,20 @@ public class Ex1 {
             return reversed;
         }
 
-        private static String getBase(int base){
+        private static String getStringBase(int base){
             return "b"+Ex1.getHexChar(base);
+        }
+
+        private static boolean isBaseValid( String number){
+            int digit = 0;
+            int base = getBase(number);
+            for (int i = number.length()-3; i >=0; i--){
+                digit = Ex1.getNumberChar( number.charAt(i));
+                if (digit == -1 || digit >= base){
+                    return false;
+                }
+            }
+            return true;
         }
 
         /**
@@ -81,9 +100,10 @@ public class Ex1 {
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            // add your code here
-
-            ////////////////////
+            if (a == null || Ex1.getBase(a) == -1) {
+                return false;
+            }
+            getBase(a);
             return ans;
         }
 
@@ -103,7 +123,7 @@ public class Ex1 {
                 }
 //                System.out.println(Ex1.reversString(ans));
                 ans = Ex1.reversString(ans);
-                ans = ans + Ex1.getBase(base);
+                ans = ans + Ex1.getStringBase(base);
                 System.out.println(ans);
 
             return ans;
@@ -116,9 +136,7 @@ public class Ex1 {
          * @return true iff the two numbers have the same values.
          */
         public static boolean equals(String n1, String n2) {
-            boolean ans = true;
-
-            return ans;
+            return Ex1.number2Int(n1) == Ex1.number2Int(n2);
         }
 
         /**
