@@ -17,11 +17,8 @@ public class Ex1 {
             if(hexNumber >= '0' && hexNumber <= '9' ){
                 return hexNumber -'0';
             }
-            else if(hexNumber >= 'A' && hexNumber <= 'F' ){
+            else if(hexNumber >= 'A' && hexNumber <= 'G' ){
                 return hexNumber - 'A' + 10;
-            }
-            else if(hexNumber >= 'a' && hexNumber <= 'f' ){
-                return hexNumber - 'a' + 10;
             }
             return -1;
         }
@@ -30,7 +27,7 @@ public class Ex1 {
             if(number >= 0 && number <= 9 ){
                 return (char)(number + '0');
             }
-            else if(number >= 10 && number <= 15 ){
+            else if(number >= 10 && number <= 16 ){
                 return (char)(number - 10 + 'A');
             }
             return '\0';
@@ -70,6 +67,19 @@ public class Ex1 {
             }
             return true;
         }
+        private static boolean baseTen (String number) {
+            int num = 0;
+            for (int i = 0; i < number.length(); i++) {
+                if (number.charAt(i) == 'b') {
+                    return false;
+                }
+                num = Ex1.getNumberChar(number.charAt(i));
+                if (num > 9 ) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         /**
          * Convert the given number (num) to a decimal representation (as int).
@@ -78,7 +88,9 @@ public class Ex1 {
          * @return
          */
         public static int number2Int(String num) {
-            int ans = -1;
+            if (!isNumber(num)){
+                return -1;
+            }
             int sum = 0;
             int power = 0;
             int base = Ex1.getBase(num);
@@ -89,9 +101,7 @@ public class Ex1 {
 
             }
 //            System.out.println(sum);
-            ans=sum;
-
-            return ans;
+            return sum;
         }
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
@@ -99,12 +109,13 @@ public class Ex1 {
          * @return true iff the given String is in a number format
          */
         public static boolean isNumber(String a) {
-            boolean ans = true;
-            if (a == null || Ex1.getBase(a) == -1) {
+            if (Ex1.baseTen(a)){
+                return true;
+            }
+            if (a == null || Ex1.getBase(a) == -1 || a.length() < 3 || !Ex1.isBaseValid(a)) {
                 return false;
             }
-            getBase(a);
-            return ans;
+            return true;
         }
 
         /**
@@ -148,10 +159,14 @@ public class Ex1 {
          *
          */
         public static int maxIndex(String[] arr) {
+            arr = new String[]{"1101b2","1102b3"};
             int ans = 0;
-            // add your code here
+            for (int i = 0; i < arr.length; i++) {
+                ans = Ex1.number2Int(arr[i]);
 
-            ////////////////////
+            }
+
+
             return ans;
         }
 }
