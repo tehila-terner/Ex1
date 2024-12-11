@@ -159,14 +159,20 @@ public class Ex1 {
          *
          */
         public static int maxIndex(String[] arr) {
-            arr = new String[]{"1101b2","1102b3"};
             int ans = 0;
-            for (int i = 0; i < arr.length; i++) {
+            int temp = 0;
+            int index =0;
+            for (int i = 0 ;  i < arr.length; i++) {
                 ans = Ex1.number2Int(arr[i]);
-
+                for (int j = 1; j < arr.length; j++) {
+                    temp = Ex1.number2Int(arr[j]);
+                    if (temp > ans) {
+                        ans = temp;
+                        index = j;
+                    }
+                }
             }
 
-
-            return ans;
+            return index;
         }
 }
