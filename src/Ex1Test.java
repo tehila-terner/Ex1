@@ -52,6 +52,9 @@ public class Ex1Test {
            String[] arr1 = new String[]{"1012b4", "1342b5","1111b2","12345b6"};
            int max1 = Ex1.maxIndex(arr1);
            assertEquals(max1 , 3);
+           String[] arr2 = new String[]{"1011b2","11111b2","1111b2","1010101b2","11b2"};
+           int max2 = Ex1.maxIndex(arr2);
+           assertEquals(max2 ,3 );
         }
 
         // Add additional test functions - test as much as you can.
