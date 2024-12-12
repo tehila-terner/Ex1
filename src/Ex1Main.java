@@ -29,7 +29,7 @@ public class Ex1Main {
         }
 
         System.out.println("ERR: num" + numberCount + "is in the wrong format!" + "("+num+")" );
-        return null;
+        return "";
     }
 
     public static String getBase(Scanner scan){
@@ -37,7 +37,7 @@ public class Ex1Main {
         String base = scan.next();
         if(!Ex1.isNumber(base) || Ex1.number2Int(base) > 16 || Ex1.number2Int(base) < 2){
             System.out.println("ERR: wrong base, should be [2,16], got" + "("+base+")");
-            return null;
+            return "";
         }
         return base;
     }
@@ -51,13 +51,13 @@ public class Ex1Main {
             System.out.println();
             System.out.println("Ex1 class solution:");
             num1 = Ex1Main.getNumber(sc, "1");
-            if (num1 != null && !num1.equals("quit")) {
+            if (num1 != "" && !num1.equals("quit")) {
                 Ex1Main.printNumberInfo(num1);
                 num2 = Ex1Main.getNumber(sc, "2");
-                if (num2 != null && !num2.equals("quit")) {
+                if (!num2.equals("") && !num2.equals("quit")) {
                     Ex1Main.printNumberInfo(num2);
                     base = Ex1Main.getBase(sc);
-                    if(base != null){
+                    if(!base.equals("")){
                         Ex1Main.printCalc(num1, num2, base);
                     }
                 }
