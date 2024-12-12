@@ -37,13 +37,6 @@ public class Ex1 {
             return '\0';
         }
 
-        public static boolean isValidBaseNumber(String baseNumber){
-            isNumber(baseNumber);
-            int nume = Ex1.number2Int(baseNumber);
-
-
-        }
-
         private static int getBase(String number) {
             if (number == null){
                 return -1;
