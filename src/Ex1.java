@@ -97,12 +97,9 @@ public class Ex1 {
             int base = Ex1.getBase(num);
             num = Ex1.getCleanNumber(num);
             for(int i =num.length()-1; i >=0; i--){
-//                System.out.print(num.charAt(i)+" ");
                 sum += getNumberChar(num.charAt(i))*Math.pow(base, power);
                 power++;
-
             }
-//            System.out.println(sum);
             return sum;
         }
 
@@ -137,7 +134,6 @@ public class Ex1 {
 //                System.out.println(Ex1.reversString(ans));
                 ans = Ex1.reversString(ans);
                 ans = ans + Ex1.getStringBase(base);
-                System.out.println(ans);
 
             return ans;
         }
