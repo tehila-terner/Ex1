@@ -11,7 +11,11 @@
  * You should implement the following static functions:
  */
 public class Ex1 {
-
+    /**
+     * this function
+     * @param hexNumber
+     * @return
+     */
 
         private static int getNumberChar(char hexNumber){
             if(hexNumber >= '0' && hexNumber <= '9' ){
@@ -33,9 +37,19 @@ public class Ex1 {
             return '\0';
         }
 
+        public static boolean isValidBaseNumber(String baseNumber){
+            isNumber(baseNumber);
+            int nume = Ex1.number2Int(baseNumber);
+
+
+        }
+
         private static int getBase(String number) {
-            if (number == null || number.length() < 2 || number.charAt(number.length() - 2) != 'b') {
+            if (number == null){
                 return -1;
+            }
+            if(number.length() < 2 || number.charAt(number.length() - 2) != 'b'){
+                return 10;
             }
             int base = Ex1.getNumberChar(number.charAt(number.length() - 1));
             if (base <= 1){
@@ -56,25 +70,19 @@ public class Ex1 {
             return "b"+Ex1.getHexChar(base);
         }
 
-        private static boolean isBaseValid( String number){
+        private static String getCleanNumber(String number){
+            if(number.length()>2 && number.charAt(number.length() - 2) == 'b'){
+                return number.substring(0, number.length() - 2);
+            }
+         return  number;
+        }
+
+        private static boolean isBaseValid( String number, int base){
             int digit = 0;
-            int base = getBase(number);
-            for (int i = number.length()-3; i >=0; i--){
+
+            for (int i = number.length()-1; i >= 0; i--){
                 digit = Ex1.getNumberChar( number.charAt(i));
                 if (digit == -1 || digit >= base){
-                    return false;
-                }
-            }
-            return true;
-        }
-        private static boolean baseTen (String number) {
-            int num = 0;
-            for (int i = 0; i < number.length(); i++) {
-                if (number.charAt(i) == 'b') {
-                    return false;
-                }
-                num = Ex1.getNumberChar(number.charAt(i));
-                if (num > 9 ) {
                     return false;
                 }
             }
@@ -94,7 +102,8 @@ public class Ex1 {
             int sum = 0;
             int power = 0;
             int base = Ex1.getBase(num);
-            for(int i = num.length()-3; i >= 0; i--){
+            num = Ex1.getCleanNumber(num);
+            for(int i =num.length()-1; i >=0; i--){
 //                System.out.print(num.charAt(i)+" ");
                 sum += getNumberChar(num.charAt(i))*Math.pow(base, power);
                 power++;
@@ -103,16 +112,16 @@ public class Ex1 {
 //            System.out.println(sum);
             return sum;
         }
+
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
          * @param a a String representing a number
          * @return true iff the given String is in a number format
          */
         public static boolean isNumber(String a) {
-            if (Ex1.baseTen(a)){
-                return true;
-            }
-            if (a == null || Ex1.getBase(a) == -1 || a.length() < 3 || !Ex1.isBaseValid(a)) {
+            int base = getBase(a);
+            String cleanNumber = Ex1.getCleanNumber(a);
+            if (a == null || base == -1  || !Ex1.isBaseValid(cleanNumber,base)) {
                 return false;
             }
             return true;
@@ -160,16 +169,13 @@ public class Ex1 {
          */
         public static int maxIndex(String[] arr) {
             int ans = 0;
-            int temp = 0;
-            int index =0;
+            int temp =0;
+            int index = 0;
             for (int i = 0 ;  i < arr.length; i++) {
                 ans = Ex1.number2Int(arr[i]);
-                for (int j = 1; j < arr.length; j++) {
-                    temp = Ex1.number2Int(arr[j]);
-                    if (temp > ans) {
-                        ans = temp;
-                        index = j;
-                    }
+                if (ans > temp){
+                    temp = ans;
+                    index= i;
                 }
             }
 
